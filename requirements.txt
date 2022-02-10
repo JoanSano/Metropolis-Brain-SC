@@ -1,0 +1,14 @@
+# Create a conda environment with python version 3.9.7
+numpy==1.22.0
+scipy
+sklearn
+pandas
+pyyaml
+torch==1.10.2
+torchvision
+torchaudio
+cuda-python
+pyraug
+seaborn
+wandb
+numba
