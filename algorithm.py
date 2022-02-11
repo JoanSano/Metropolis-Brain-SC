@@ -70,6 +70,7 @@ class Metropolis():
                 new_graphs[gr,i,j] = new[gr]
             else:
                 pass
+        # We reinitialize the class with the updated graph
         self.__init__(new_graphs, T=self.T)
 
     def step(self, logs=False):

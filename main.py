@@ -34,10 +34,12 @@ if __name__ == '__main__':
     for i in range(args.batch):
         subjects.add(str(i+1))
 
+    # Metropolis Monte Carlo evolution
     graphs = random_graph_gen(size=30, batch=args.batch, to_torch=True)
     graph_dumper(pre_dir, graphs, subjects, suffix='initial')
     MC = Metropolis(graphs, T=args.temperature)
     for i in tqdm(range(args.steps)):
+        # We do a step of the algorithm
         E_tot, E_node, E_batch, E_node_batch = MC.step(logs=False)
         wandb.log({"Energy of the batch per node": E_node_batch})
     evolved_graphs = MC.get_graphs()
