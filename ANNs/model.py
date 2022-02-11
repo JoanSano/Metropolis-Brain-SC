@@ -33,16 +33,6 @@ class Ising:
         nb = self.graphs[:,(i+1)%self.N, j] + self.graphs[:,i,(j+1)%self.N] + self.graphs[:,(i-1)%self.N, j] + self.graphs[:,i,(j-1)%self.N]
         return -nb*s
 
-class ISINET(nn.Module):
-    def __init__(self):
-        super().__init__()
-        # Given that an Ising model only deals with short-range interactions,
-        #    small-sized 2D convolutions should do the trick.
-
-class FREENET(nn.Module):
-    def __init__(self) -> None:
-        super().__init__()
-
 def constrain():
     """
     Sets a constraint.

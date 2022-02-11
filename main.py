@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-S','--steps', default=100, type=int, help='Number of Monte Carlo steps to sample')
 parser.add_argument('-B','--batch', default=1, type=int, help='Batch size')
 parser.add_argument('-T','--temperature', default=1.25, type=float, help='Temperature or randomness')
-# Device and results
+# Device and directories
 parser.add_argument('-D','--device', default='cuda', type=str, help='Device')
 parser.add_argument('-F','--folder', default='results', type=str, help='Rsults folder')
 args = parser.parse_args()
