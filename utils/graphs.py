@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pylab as plt
 import os
 
+# TODO Add GraphFromTensor -- Basically the same but without having to read a file. It receives a batch of graphs flattened or not and does whatever.
+
 class GraphFromCSV:
     """
     It creates an object with different properties from a csv. Everything related to it, will be
@@ -30,6 +32,7 @@ class GraphFromCSV:
         Even indices correspond to rigth hemisphere regions.
         Stores a dictionary with the reodering of indices.
         """
+
         odd_odd = self.conns[::2, ::2]
         odd_even = self.conns[::2, 1::2]
         first = np.vstack((odd_odd, odd_even))
@@ -48,12 +51,14 @@ class GraphFromCSV:
         """
         Takes the natural logarithm of the connections. Enhances visualisation of the matrix.
         """
+
         self.conns = np.log1p(self.conns)
 
     def __plot_graph(self, save=True, show=False, fig_size=(20,15)):
         """
         Plot a graph. It assumes that the adjancency matrix is a csv file.
         """
+
         plt.figure(figsize=fig_size)
         plt.imshow(self.conns)
         cbar = plt.colorbar()
@@ -68,6 +73,7 @@ class GraphFromCSV:
         """
         Applies default operations to the graph to work with it.
         """
+
         self.processed = True # The object has been processed
         if self.conns.shape[0] <= 1:
             raise ValueError("You are trying to process a flat graph. Can't do it. Unflatten your graph and set it to default.")
@@ -79,6 +85,9 @@ class GraphFromCSV:
             self.__plot_graph(save=True, show=False, fig_size=(20,15))
     
     def get_connections(self, ini=False):
+        """ 
+        Get values of the connevtivites of either the original or processed graph. 
+        """
         if not ini:
             return self.conns 
         else:
@@ -89,6 +98,7 @@ class GraphFromCSV:
         Flatten the lower triangular adjancency matrix of the graph. 
         The flattened graph becomes available after applying this method.
         """
+        
         x = self.conns.shape[0] # Dimensions of the graph 
         if x <= 1:
             raise ValueError("Dimension of the graph is 1 (or lower). You can't flattened an already flattened graph")
@@ -111,6 +121,7 @@ class GraphFromCSV:
         to_default: bool - The unflattened matrix becomes the default graph and replaces 
             the initial flat graph. As a checkpoint, the flattened graph is saved in the directory(default: False)
         """
+
         x = self.conns.shape[0] # First dimension of the flattened graph 
         flat_dim = self.conns.shape[1]
         if x > 1:

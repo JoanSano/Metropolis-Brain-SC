@@ -12,3 +12,4 @@ pyraug
 seaborn
 wandb
 numba
+tqdm
